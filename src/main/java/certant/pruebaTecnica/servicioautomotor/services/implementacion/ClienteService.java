@@ -25,8 +25,7 @@ public class ClienteService implements IClienteService{
 
 	@Override
 	public Cliente findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteRepository.findByIdCliente(id);
 	}
 
 	@Override
@@ -37,7 +36,19 @@ public class ClienteService implements IClienteService{
 	
 	@Override
 	public Cliente insertOrUpdate(Cliente cliente) {
+//		Cliente clientebd = clienteRepository.findByPatente(cliente.getPatente());
+//		System.out.println("clientebd"+clientebd);
+//		System.out.println("cliente"+cliente);
+//		if(clientebd != null) {
+//			clientebd.setCantServiciosContratados(cliente.getCantServiciosContratados()+clientebd.getCantServiciosContratados());
+//			return clienteRepository.save(clientebd);
+//		}
 		return clienteRepository.save(cliente);
+	}
+
+	@Override
+	public Cliente findByPatente(String patente) {
+		return clienteRepository.findByPatente(patente);
 	}
 	
 	

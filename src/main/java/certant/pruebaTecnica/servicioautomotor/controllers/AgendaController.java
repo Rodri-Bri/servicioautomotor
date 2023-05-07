@@ -56,12 +56,19 @@ public class AgendaController {
 	@GetMapping("/clientes")
     public ModelAndView misPrestamos() {
         ModelAndView mAV = new ModelAndView(ViewRouteHelpers.AGENDA);
-        
+       
+        List<Cliente> clienteList = clienteService.getAll();
+        for(int i = 0; i < clienteList.size(); i++) {
+        	if(clienteList.get(i).getCantServiciosContratados() >= 5) {
+        		clienteList.get(i).setPremium(true);
+        		clienteService.insertOrUpdate(clienteList.get(i));
+        	}
+        }
         
         mAV.addObject("agendas", agendaService.getAll());
         System.out.println(agendaService.getAll());
-        mAV.addObject("clientes", clienteService.getAll());
         
+        mAV.addObject("clientes", clienteList);
         
         mAV.addObject("elIdQueSaqueDeLaRuta", 1);
         mAV.addObject("id", 1);
@@ -80,39 +87,90 @@ public class AgendaController {
     		 @ModelAttribute("lavado") Lavado lavado) {
     	
     	
-    	System.out.println("AGENDA" + agenda);
-    	System.out.println("CLIENTE" + cliente);
+    	Cliente clientebd = clienteService.findByPatente(cliente.getPatente());
     	
+    	
+    	if(clientebd != null) {
+    		cliente.setPremium(clientebd.isPremium());
+    		cliente.setIdCliente(clientebd.getIdCliente());
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+clientebd.getCantServiciosContratados());
+    	}
+    	
+    	
+    	double total = calcularTotal(lavado, aceiteYfiltro, alineacionYbalanceo, cliente);
+
     	
     	ServiciosBasicos servicioBasico = new ServiciosBasicos();
     	
     	servicioBasico.setAceiteYfiltro(aceiteYfiltro);
     	aceiteYfiltroService.insertOrUpdate(aceiteYfiltro);
     	
-    	
     	servicioBasico.setAlineacionYbalanceo(alineacionYbalanceo);
     	alineacionYbalanceoService.insertOrUpdate(alineacionYbalanceo);
     	
     	servicioBasico.setLavado(lavado);
     	lavadoService.insertOrUpdate(lavado);
-    	
-    	
 
+    	
+    	System.out.println(cliente.isPremium());
+    	if(cliente.isPremium()) {
+    		agenda.setCalcularPrecioServicio(total - total * 0.20);
+    		cliente.setPremium(false);
+    		cliente.setCantServiciosContratados(0);
+    	}else {
+    		agenda.setCalcularPrecioServicio(total); 		
+    	}
+    	
     	serviciosBasicosService.insertOrUpdate(servicioBasico);
     	clienteService.insertOrUpdate(cliente);
-    
+    	
     	agenda.setServicioContratados(servicioBasico);
     	agenda.setCliente(cliente);
-    	
-    	
-    	
+
     	agendaService.insertOrUpdate(agenda);
     
     return new RedirectView(ViewRouteHelpers.REDIRECT_AGENDA);
     }
+    
+    public double calcularTotal(Lavado lavado, AceiteYfiltro aceiteYfiltro, AlineacionYbalanceo alineacionYbalanceo, Cliente cliente) {
+    	double total = 0;
+    	if(lavado.isBasico()) {
+    		lavado.setPrecio(1000);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += lavado.getPrecio();
+    	}else if(lavado.isPremium()){
+    		lavado.setPrecio(2000);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += lavado.getPrecio();
+    	}else if(lavado.isCompleto()) {
+    		lavado.setPrecio(500);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += lavado.getPrecio();
+    	}
+    	
+    	if(aceiteYfiltro.isAceiteYfiltroBasico()) {
+    		aceiteYfiltro.setPrecio(1000);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += aceiteYfiltro.getPrecio();
+    	}else if(aceiteYfiltro.isAltoRendimiento()){
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		aceiteYfiltro.setPrecio(2000);
+    		total += aceiteYfiltro.getPrecio();
+    	}
+    	
+    	if(alineacionYbalanceo.isCambioDeCubierta()) {
+    		alineacionYbalanceo.setPrecio(400);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += alineacionYbalanceo.getPrecio();
+    	}else {
+    		alineacionYbalanceo.setPrecio(200);
+    		cliente.setCantServiciosContratados(cliente.getCantServiciosContratados()+1);
+    		total += alineacionYbalanceo.getPrecio();
+    	}
+    	return total;
+    }
 
 }
-	
 	
 	
 	

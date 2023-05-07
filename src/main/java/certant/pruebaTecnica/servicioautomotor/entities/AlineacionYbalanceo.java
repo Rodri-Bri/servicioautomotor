@@ -20,16 +20,16 @@ public class AlineacionYbalanceo {
 	private boolean cambioDeCubierta;
 	
 	
-	@Column(columnDefinition = "double default 300")
-	private double precioCambioDeCubierta;
+	@Column()
+	private double precio;
 	
 	public AlineacionYbalanceo() {}
 
-	public AlineacionYbalanceo(int idAlineacionYbalanceo, boolean cambioDeCubierta, double precioCambioDeCubierta) {
+	public AlineacionYbalanceo(int idAlineacionYbalanceo, boolean cambioDeCubierta, double precio) {
 		super();
 		this.idAlineacionYbalanceo = idAlineacionYbalanceo;
 		this.cambioDeCubierta = cambioDeCubierta;
-		this.precioCambioDeCubierta = precioCambioDeCubierta;
+		this.precio = precio;
 	}
 
 	public int getIdAlineacionYbalanceo() {
@@ -48,19 +48,22 @@ public class AlineacionYbalanceo {
 		this.cambioDeCubierta = cambioDeCubierta;
 	}
 
-	public double getPrecioCambioDeCubierta() {
-		return precioCambioDeCubierta;
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setPrecioCambioDeCubierta(double precioCambioDeCubierta) {
-		this.precioCambioDeCubierta = precioCambioDeCubierta;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	@Override
 	public String toString() {
 		return "AlineacionYbalanceo [idAlineacionYbalanceo=" + idAlineacionYbalanceo + ", cambioDeCubierta="
-				+ cambioDeCubierta + ", precioCambioDeCubierta=" + precioCambioDeCubierta + "]";
+				+ cambioDeCubierta + ", precio=" + precio + "]";
 	}
+
+
+	
 
 	
 	

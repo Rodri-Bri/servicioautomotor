@@ -25,24 +25,19 @@ public class Lavado {
 	@Column(columnDefinition = "boolean default false", nullable=true)
 	private boolean premium;
 	
-	@Column(columnDefinition = "double default 20")
-	private double precioBasico;
-	@Column(columnDefinition = "double default 50")
-	private double precioCompleto;
-	@Column(columnDefinition = "double default 100")
-	private double precioPremium;
+	@Column
+	private double precio;
+
 	
 	public Lavado() {}
 	
-	public Lavado(int idLavado, boolean basico, boolean completo, boolean premium, double precioBasico,
-			double precioCompleto, double precioPremium) {
+	public Lavado(int idLavado, boolean basico, boolean completo, boolean premium, double precio) {
 		this.idLavado = idLavado;
 		this.basico = basico;
 		this.completo = completo;
 		this.premium = premium;
-		this.precioBasico = precioBasico;
-		this.precioCompleto = precioCompleto;
-		this.precioPremium = precioPremium;
+		this.precio = precio;
+
 	}
 
 	public int getIdLavado() {
@@ -77,36 +72,27 @@ public class Lavado {
 		this.premium = premium;
 	}
 
-	public double getPrecioBasico() {
-		return precioBasico;
+	public double getPrecio() {
+		return precio;
 	}
 
-	public void setPrecioBasico(double precioBasico) {
-		this.precioBasico = precioBasico;
-	}
-
-	public double getPrecioCompleto() {
-		return precioCompleto;
-	}
-
-	public void setPrecioCompleto(double precioCompleto) {
-		this.precioCompleto = precioCompleto;
-	}
-
-	public double getPrecioPremium() {
-		return precioPremium;
-	}
-
-	public void setPrecioPremium(double precioPremium) {
-		this.precioPremium = precioPremium;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	@Override
 	public String toString() {
 		return "Lavado [idLavado=" + idLavado + ", basico=" + basico + ", completo=" + completo + ", premium=" + premium
-				+ ", precioBasico=" + precioBasico + ", precioCompleto=" + precioCompleto + ", precioPremium="
-				+ precioPremium + "]";
+				+ ", precio=" + precio + "]";
 	}
+
+
+
+
+
+
+
+
 
 
 	
