@@ -17,7 +17,7 @@ public class AceiteYfiltro {
 	private int idAceiteYfiltro;
 	
 	@Column(columnDefinition = "boolean default false", nullable = true)
-	private boolean basico;
+	private boolean aceiteYfiltroBasico;
 	
 	@Column(columnDefinition = "boolean default false", nullable = true)
 	private boolean altoRendimiento;
@@ -29,10 +29,10 @@ public class AceiteYfiltro {
 	
 	public AceiteYfiltro() {}
 
-	public AceiteYfiltro(int idAceiteYfiltro, boolean basico, boolean altoRendimiento, double precioBasico,
+	public AceiteYfiltro(int idAceiteYfiltro, boolean aceiteYfiltroBasico, boolean altoRendimiento, double precioBasico,
 			double precioAltoRendimiento) {
 		this.idAceiteYfiltro = idAceiteYfiltro;
-		this.basico = basico;
+		this.aceiteYfiltroBasico = aceiteYfiltroBasico;
 		this.altoRendimiento = altoRendimiento;
 		this.precioBasico = precioBasico;
 		this.precioAltoRendimiento = precioAltoRendimiento;
@@ -46,12 +46,14 @@ public class AceiteYfiltro {
 		this.idAceiteYfiltro = idAceiteYfiltro;
 	}
 
-	public boolean isBasico() {
-		return basico;
+	
+
+	public boolean isAceiteYfiltroBasico() {
+		return aceiteYfiltroBasico;
 	}
 
-	public void setBasico(boolean basico) {
-		this.basico = basico;
+	public void setAceiteYfiltroBasico(boolean aceiteYfiltroBasico) {
+		this.aceiteYfiltroBasico = aceiteYfiltroBasico;
 	}
 
 	public boolean isAltoRendimiento() {
@@ -80,10 +82,12 @@ public class AceiteYfiltro {
 
 	@Override
 	public String toString() {
-		return "AceiteYfiltro [idAceiteYfiltro=" + idAceiteYfiltro + ", basico=" + basico + ", altoRendimiento="
-				+ altoRendimiento + ", precioBasico=" + precioBasico + ", precioAltoRendimiento="
+		return "AceiteYfiltro [idAceiteYfiltro=" + idAceiteYfiltro + ", aceiteYfiltroBasico=" + aceiteYfiltroBasico
+				+ ", altoRendimiento=" + altoRendimiento + ", precioBasico=" + precioBasico + ", precioAltoRendimiento="
 				+ precioAltoRendimiento + "]";
 	}
+
+
 	
 	
 }

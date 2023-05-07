@@ -11,13 +11,29 @@
 			  <tr>
 				  <th>Name</th>
 				  <th>Patente</th>
-				  <th>Lavado</th>
+				  <th>Lavado Basico</th>
+				  <th>Lavado Completo</th>
+				  <th>Lavado premium</th>
+				 	
+				 <th>Alineacion y balanceo </th>
+				 <th>aceiteYfiltro basico</th>
+				 <th>aceiteYfiltro alto rendimiento</th> 
+				  
 			  </tr>
 		  </thead>
 		  <tbody>
 			  <tr th:each="a : ${agendas}">
-				  <td><span th:text="${a.cliente.nombre}"></span></td>
-				  <td><span th:text="${a.cliente.patente}"></span></td>
+				  <td><span  th:text="${a.cliente.nombre}"></span></td>
+				  <td ><span th:text="${a.cliente.patente}"></span></td>
+				  <td><span th:text="${a.servicioContratados.lavado.basico == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:text="${a.servicioContratados.lavado.completo == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:text="${a.servicioContratados.lavado.premium == false} ? 'No' : 'Si'"></span></td>
+				  
+				   <td><span th:text="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == false} ? 'No' : 'Si'"></span></td>
+				  
+				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.aceiteYfiltroBasico == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.altoRendimiento == false} ? 'No' : 'Si'"></span></td>
+				  
 				  
 			  </tr>
 		  </tbody>
@@ -40,7 +56,7 @@
 		    </div>
 		    <div>
 		        <label>Que aceite y filtro quieres?</label>
-		        <input th:field="${aceiteYfiltro.basico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
+		        <input th:field="${aceiteYfiltro.aceiteYfiltroBasico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
 		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "radio" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
 		    </div>
                
