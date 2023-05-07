@@ -1,0 +1,53 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>El título de mi página</title>
+  </head>
+  <body>
+	  <header>
+		  <table border="1px">
+		  <thead>
+			  <tr>
+				  <th>Name</th>
+				  <th>Patente</th>
+				  <th>Lavado</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+			  <tr th:each="a : ${agendas}">
+				  <td><span th:text="${a.cliente.nombre}"></span></td>
+				  <td><span th:text="${a.cliente.patente}"></span></td>
+				  
+			  </tr>
+		  </tbody>
+		  </table>
+		  
+		 <form th:action="@{/agendas/create}" th:object="${agenda}" method="post">
+			<p>Nombre: <input type="text" th:field="${cliente.nombre}" /></p>
+			<p>Patente: <input type="text" th:field="${cliente.patente}" /></p>
+			
+		
+			<div>
+		        <label>Que lavado quieres?</label>
+		        <input th:field="${lavado.basico}" type = "radio" name="lavado"  value = "true"/> Basico
+		        <input th:field="${lavado.completo}" type = "radio" name="lavado"  value = "true" /> Completo
+		        <input th:field="${lavado.premium}" type = "radio" name="lavado"  value = "true" /> Premium
+		    </div>
+		    <div>
+		        <label>Quieres alineacion y balanceo?</label>
+		        <input th:field="${alineacionYbalanceo.cambioDeCubierta}" type = "radio" name = "alineacion_y_balanceo" value = "true" /> Si
+		    </div>
+		    <div>
+		        <label>Que aceite y filtro quieres?</label>
+		        <input th:field="${aceiteYfiltro.basico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
+		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "radio" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
+		    </div>
+               
+           
+		    <input type="datetime-local" th:field="${agenda.fechaYhora}">
+			<input type="submit" value="crear"/>
+		  </form>
+	  </header>
+  </body>
+</html>
