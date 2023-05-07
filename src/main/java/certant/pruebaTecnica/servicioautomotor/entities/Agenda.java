@@ -39,10 +39,12 @@ public class Agenda {
 	@Column(nullable=true)
 	private double calcularPrecioServicio;
 	
+	private boolean aplicoDescuento = false;
+	
 	public Agenda() {}
 
 	public Agenda(int idAgenda, Cliente cliente, Date fechaYhora, ServiciosBasicos servicioContratados,
-			double calcularPrecioServicio) {
+			double calcularPrecioServicio,  boolean aplicoDescuento) {
 		this.idAgenda = idAgenda;
 		this.cliente = cliente;
 		this.fechaYhora = fechaYhora;
@@ -88,6 +90,15 @@ public class Agenda {
 
 	public void setCalcularPrecioServicio(double calcularPrecioServicio) {
 		this.calcularPrecioServicio = calcularPrecioServicio;
+	}
+
+	
+	public boolean isAplicoDescuento() {
+		return aplicoDescuento;
+	}
+
+	public void setAplicoDescuento(boolean aplicoDescuento) {
+		this.aplicoDescuento = aplicoDescuento;
 	}
 
 	@Override

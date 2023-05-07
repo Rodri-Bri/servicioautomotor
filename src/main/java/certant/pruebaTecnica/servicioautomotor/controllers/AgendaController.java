@@ -117,6 +117,7 @@ public class AgendaController {
     		agenda.setCalcularPrecioServicio(total - total * 0.20);
     		cliente.setPremium(false);
     		cliente.setCantServiciosContratados(0);
+    		agenda.setAplicoDescuento(true);
     	}else {
     		agenda.setCalcularPrecioServicio(total); 		
     	}

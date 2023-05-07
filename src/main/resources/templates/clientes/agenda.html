@@ -9,20 +9,22 @@
 		  <table border="1px">
 		  <thead>
 			  <tr>
+				  <th>Cliente Premium(Si/No)</th>
 				  <th>Name</th>
 				  <th>Patente</th>
-				  <th>Lavado Basico</th>
-				  <th>Lavado Completo</th>
-				  <th>Lavado premium</th>
-				 	
-				 <th>Alineacion y balanceo </th>
-				 <th>aceiteYfiltro basico</th>
-				 <th>aceiteYfiltro alto rendimiento</th> 
-				  
+				  <th>Lavado Basico: $1000</th>
+				  <th>Lavado Completo: $2000</th>
+				  <th>Lavado premium: $500</th>
+				 <th>Cambio de cubierta: $200 sin $400</th>
+				 <th>Aceite Y filtro basico: $1000</th>
+				 <th>Aceite Y filtro alto rendimiento: $2000</th> 
+				 <th>Precio total:</th>
+				 <th>APLICO DESCUENTO</th>
 			  </tr>
 		  </thead>
 		  <tbody>
 			  <tr th:each="a : ${agendas}">
+				   <td><span th:text="${a.cliente.isPremium == false} ? 'No' : 'Si'"></span></td>
 				  <td><span  th:text="${a.cliente.nombre}"></span></td>
 				  <td ><span th:text="${a.cliente.patente}"></span></td>
 				  <td><span th:text="${a.servicioContratados.lavado.basico == false} ? 'No' : 'Si'"></span></td>
@@ -34,7 +36,8 @@
 				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.aceiteYfiltroBasico == false} ? 'No' : 'Si'"></span></td>
 				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.altoRendimiento == false} ? 'No' : 'Si'"></span></td>
 				  
-				  
+				  <td><span th:text="${a.calcularPrecioServicio}"></span></td>
+				  <td><span th:text="${a.aplicoDescuento == false} ? 'No' : 'Si'"></span></td>
 			  </tr>
 		  </tbody>
 		  </table>
