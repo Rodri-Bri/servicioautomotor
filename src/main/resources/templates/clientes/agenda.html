@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <title>El título de mi página</title>
 	
-	<link href="/css/estilos.css" rel="stylesheet">
+	
+	<!--  <link href="/css/estilos.css" rel="stylesheet"> -->
+	<link href="/css/design.css" rel="stylesheet">
+	
   </head>
   <body>
 	  <header>
@@ -31,18 +34,18 @@
 			<div class="container-radio">
 			<div>
 		        <label>Que lavado quieres?</label>
-		        <input type = "radio" name="lavado" th:field="${lavado.basico}" value="true" /> Basico
-		        <input type = "radio" name="lavado"  th:field="${lavado.completo}" value="true"   /> Completo
-		        <input type = "radio" name="lavado"  th:field="${lavado.premium}" value="true"  /> Premium
+		        <input type = "checkbox"   name="lavado" th:field="${lavado.basico}" value="true" /> Basico
+		        <input type = "checkbox"  name="lavado"  th:field="${lavado.completo}" value="true"   /> Completo
+		        <input type = "checkbox"  name="lavado"  th:field="${lavado.premium}" value="true"  /> Premium
 		    </div>
 		    <div>
 		        <label>Quieres alineacion y balanceo con cambio de cubierta?</label>
-		        <input th:field="${alineacionYbalanceo.cambioDeCubierta}" type = "radio" name = "alineacion_y_balanceo" value = "true" /> Si
+		        <input th:field="${alineacionYbalanceo.cambioDeCubierta}" type = "checkbox" name = "alineacion_y_balanceo" value = "true" /> Si
 		    </div>
 		    <div>
 		        <label>Que aceite y filtro quieres?</label>
-		        <input th:field="${aceiteYfiltro.aceiteYfiltroBasico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
-		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "radio" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
+		        <input th:field="${aceiteYfiltro.aceiteYfiltroBasico}" type = "checkbox" name = "aceite_y_filtro" value = "true" /> Basico
+		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "checkbox" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
 		    </div>
 		</div>
 		    <input type="datetime-local" th:field="${agenda.fechaYhora}">
@@ -57,7 +60,7 @@
 		  <thead>
 			  <tr>
 				  <th>Cliente Premium(Si/No)</th>
-				  <th>Name</th>
+				  <th>Nombre</th>
 				  <th>Patente</th>
 				  <th>Lavado Basico: $1000</th>
 				  <th>Lavado Completo: $2000</th>
