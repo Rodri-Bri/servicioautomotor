@@ -28,8 +28,7 @@ public class AgendaService implements IAgendaService{
 
 	@Override
 	public Agenda findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return agendaRepository.findByIdAgenda(id);
 	}
 
 	

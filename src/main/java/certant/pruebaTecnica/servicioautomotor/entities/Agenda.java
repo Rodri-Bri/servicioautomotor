@@ -111,8 +111,7 @@ public class Agenda {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(aplicoDescuento, calcularPrecioServicio, cliente, fechaYhora, idAgenda,
-				servicioContratados);
+		return Objects.hash(cliente, idAgenda);
 	}
 
 	@Override
@@ -124,12 +123,12 @@ public class Agenda {
 		if (getClass() != obj.getClass())
 			return false;
 		Agenda other = (Agenda) obj;
-		return aplicoDescuento == other.aplicoDescuento
-				&& Double.doubleToLongBits(calcularPrecioServicio) == Double
-						.doubleToLongBits(other.calcularPrecioServicio)
-				&& Objects.equals(cliente, other.cliente) && Objects.equals(fechaYhora, other.fechaYhora)
-				&& idAgenda == other.idAgenda && Objects.equals(servicioContratados, other.servicioContratados);
+		return Objects.equals(cliente, other.cliente) && idAgenda == other.idAgenda;
 	}
+
+
+	
+	
 	
 	
 	

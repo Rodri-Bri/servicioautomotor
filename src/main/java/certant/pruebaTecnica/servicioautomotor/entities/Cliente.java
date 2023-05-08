@@ -57,6 +57,7 @@ public class Cliente {
 	}
 
 	public void setPatente(String patente) {
+		
 		this.patente = patente;
 	}
 	
@@ -103,7 +104,7 @@ public class Cliente {
 				&& Objects.equals(patente, other.patente);
 	}
 
-	
+
 	
 	
 	

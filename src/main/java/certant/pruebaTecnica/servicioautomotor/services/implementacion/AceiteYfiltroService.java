@@ -21,11 +21,7 @@ public class AceiteYfiltroService implements IAceiteYfiltroService{
 		return aceiteYfiltroRepository.save(aceiteYfiltro);
 	}
 	
-	@Override
-	public AceiteYfiltro findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 	
 	
