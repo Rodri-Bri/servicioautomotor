@@ -1,5 +1,7 @@
 package certant.pruebaTecnica.servicioautomotor.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -78,6 +80,27 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [idCliente=" + idCliente + ", nombre=" + nombre + ", patente=" + patente
 				+ ", cantServiciosContratados=" + cantServiciosContratados + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cantServiciosContratados, idCliente, isPremium, nombre, patente);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return cantServiciosContratados == other.cantServiciosContratados && idCliente == other.idCliente
+				&& isPremium == other.isPremium && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(patente, other.patente);
 	}
 
 	

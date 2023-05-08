@@ -3,10 +3,56 @@
   <head>
     <meta charset="utf-8" />
     <title>El título de mi página</title>
+	
+	<link href="/css/estilos.css" rel="stylesheet">
   </head>
   <body>
 	  <header>
-		  <table border="1px">
+      <div class="navbar">
+        <h1 class="logo">Rodrigo Brito</h1>
+        <ul class="links">
+         	<li><a href="#form">Agregar Cliente</a></li>
+            <li><a href="#clientes">Ver clientes</a></li>
+            <li><a href="https://github.com/Rodri-Bri">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/rodri-bri/">Linkdlin</a></li>
+        </ul>
+        <div class="toggle_btn">
+            <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      </header>
+	  <div class="container-form" id="form">
+		<div class="form">
+		<h2>Ingresar datos de cliente</h2>
+		 <form th:action="@{/agendas/create}" th:object="${agenda}" method="post">
+			<p>Nombre del cliente: <input type="text" th:field="${cliente.nombre}" placeholder="Nombre"/></p>
+			<p>Patente del vehiculo: <input type="text" th:field="${cliente.patente}" placeholder="Patente"/></p>
+			<div class="container-radio">
+			<div>
+		        <label>Que lavado quieres?</label>
+		        <input type = "radio" name="lavado" th:field="${lavado.basico}" value="true" /> Basico
+		        <input type = "radio" name="lavado"  th:field="${lavado.completo}" value="true"   /> Completo
+		        <input type = "radio" name="lavado"  th:field="${lavado.premium}" value="true"  /> Premium
+		    </div>
+		    <div>
+		        <label>Quieres alineacion y balanceo con cambio de cubierta?</label>
+		        <input th:field="${alineacionYbalanceo.cambioDeCubierta}" type = "radio" name = "alineacion_y_balanceo" value = "true" /> Si
+		    </div>
+		    <div>
+		        <label>Que aceite y filtro quieres?</label>
+		        <input th:field="${aceiteYfiltro.aceiteYfiltroBasico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
+		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "radio" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
+		    </div>
+		</div>
+		    <input type="datetime-local" th:field="${agenda.fechaYhora}">
+			<input type="submit" value="crear"/>
+		  </form>
+		 	 </div> 
+		  </div>
+		<div class="section-clientes" id="clientes">
+		<div class="contenedor">
+		<h2>Clientes</h2>
+		  <table class="tabla">
 		  <thead>
 			  <tr>
 				  <th>Cliente Premium(Si/No)</th>
@@ -24,49 +70,25 @@
 		  </thead>
 		  <tbody>
 			  <tr th:each="a : ${agendas}">
-				   <td><span th:text="${a.cliente.isPremium == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:text="${a.cliente.isPremium == false} ? 'No' : 'Si'"></span></td>
 				  <td><span  th:text="${a.cliente.nombre}"></span></td>
-				  <td ><span th:text="${a.cliente.patente}"></span></td>
-				  <td><span th:text="${a.servicioContratados.lavado.basico == false} ? 'No' : 'Si'"></span></td>
-				  <td><span th:text="${a.servicioContratados.lavado.completo == false} ? 'No' : 'Si'"></span></td>
-				  <td><span th:text="${a.servicioContratados.lavado.premium == false} ? 'No' : 'Si'"></span></td>
+				  <td><span  th:text="${a.cliente.patente}"></span></td>
+				  <td><span  th:if="${a.servicioContratados.lavado.basico == true}" th:text="${a.servicioContratados.lavado.basico} ? 'No' : 'Si'"></span></td>
+				  <td><span  th:if="${a.servicioContratados.lavado.completo == true}" th:text="${a.servicioContratados.lavado.completo == false} ? 'No' : 'Si'"></span></td>
+				  <td><span  th:if="${a.servicioContratados.lavado.premium == true}" th:text="${a.servicioContratados.lavado.premium == false} ? 'No' : 'Si'"></span></td>
 				  
-				   <td><span th:text="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:if="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == true}" th:text="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == false} ? 'No' : 'Si'"></span></td>
 				  
-				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.aceiteYfiltroBasico == false} ? 'No' : 'Si'"></span></td>
-				  <td><span th:text="${a.servicioContratados.aceiteYfiltro.altoRendimiento == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:if="${a.servicioContratados.aceiteYfiltro.aceiteYfiltroBasico == true}" th:text="${a.servicioContratados.aceiteYfiltro.aceiteYfiltroBasico == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:if="${a.servicioContratados.aceiteYfiltro.altoRendimiento == true}" th:text="${a.servicioContratados.aceiteYfiltro.altoRendimiento == false} ? 'No' : 'Si'"></span></td>
 				  
 				  <td><span th:text="${a.calcularPrecioServicio}"></span></td>
 				  <td><span th:text="${a.aplicoDescuento == false} ? 'No' : 'Si'"></span></td>
 			  </tr>
 		  </tbody>
 		  </table>
-		  
-		 <form th:action="@{/agendas/create}" th:object="${agenda}" method="post">
-			<p>Nombre: <input type="text" th:field="${cliente.nombre}" /></p>
-			<p>Patente: <input type="text" th:field="${cliente.patente}" /></p>
-			
-		
-			<div>
-		        <label>Que lavado quieres?</label>
-		        <input th:field="${lavado.basico}" type = "radio" name="lavado"  value = "true"/> Basico
-		        <input th:field="${lavado.completo}" type = "radio" name="lavado"  value = "true" /> Completo
-		        <input th:field="${lavado.premium}" type = "radio" name="lavado"  value = "true" /> Premium
-		    </div>
-		    <div>
-		        <label>Quieres alineacion y balanceo con cambio de cubierta?</label>
-		        <input th:field="${alineacionYbalanceo.cambioDeCubierta}" type = "radio" name = "alineacion_y_balanceo" value = "true" /> Si
-		    </div>
-		    <div>
-		        <label>Que aceite y filtro quieres?</label>
-		        <input th:field="${aceiteYfiltro.aceiteYfiltroBasico}" type = "radio" name = "aceite_y_filtro" value = "true" /> Basico
-		   		<input th:field="${aceiteYfiltro.altoRendimiento}" type = "radio" name = "aceite_y_filtro" value = "true" /> Alto rendimiento
-		    </div>
-               
-           
-		    <input type="datetime-local" th:field="${agenda.fechaYhora}">
-			<input type="submit" value="crear"/>
-		  </form>
-	  </header>
+		</div>
+	</div>
+	
   </body>
 </html>

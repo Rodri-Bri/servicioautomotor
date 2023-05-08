@@ -2,6 +2,7 @@ package certant.pruebaTecnica.servicioautomotor.entities;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -106,6 +107,28 @@ public class Agenda {
 		return "Agenda [idAgenda=" + idAgenda + ", cliente=" + cliente + ", fechaYhora=" + fechaYhora
 				+ ", servicioContratados=" + servicioContratados + ", calcularPrecioServicio=" + calcularPrecioServicio
 				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(aplicoDescuento, calcularPrecioServicio, cliente, fechaYhora, idAgenda,
+				servicioContratados);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Agenda other = (Agenda) obj;
+		return aplicoDescuento == other.aplicoDescuento
+				&& Double.doubleToLongBits(calcularPrecioServicio) == Double
+						.doubleToLongBits(other.calcularPrecioServicio)
+				&& Objects.equals(cliente, other.cliente) && Objects.equals(fechaYhora, other.fechaYhora)
+				&& idAgenda == other.idAgenda && Objects.equals(servicioContratados, other.servicioContratados);
 	}
 	
 	

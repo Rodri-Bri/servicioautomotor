@@ -1,5 +1,7 @@
 package certant.pruebaTecnica.servicioautomotor.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -60,6 +62,24 @@ public class AlineacionYbalanceo {
 	public String toString() {
 		return "AlineacionYbalanceo [idAlineacionYbalanceo=" + idAlineacionYbalanceo + ", cambioDeCubierta="
 				+ cambioDeCubierta + ", precio=" + precio + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(cambioDeCubierta, idAlineacionYbalanceo, precio);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AlineacionYbalanceo other = (AlineacionYbalanceo) obj;
+		return cambioDeCubierta == other.cambioDeCubierta && idAlineacionYbalanceo == other.idAlineacionYbalanceo
+				&& Double.doubleToLongBits(precio) == Double.doubleToLongBits(other.precio);
 	}
 
 
