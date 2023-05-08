@@ -1,6 +1,8 @@
 package certant.pruebaTecnica.servicioautomotor.entities;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -56,8 +58,8 @@ public class Cliente {
 		return patente;
 	}
 
-	public void setPatente(String patente) {
-		
+	public void setPatente(String patente) throws Exception {
+		if(!verificarPatente(patente)) throw new Exception("Esta patente no es valida!");
 		this.patente = patente;
 	}
 	
@@ -106,6 +108,12 @@ public class Cliente {
 
 
 	
-	
+	    public static boolean verificarPatente(String patente) {
+	        String patron = "^[A-Z]{2,3}\\d{3}[A-Z]{0,2}$";
+	        Pattern pattern = Pattern.compile(patron);
+	        Matcher matcher = pattern.matcher(patente);
+	        return matcher.matches();
+	    }
 	
 }
+

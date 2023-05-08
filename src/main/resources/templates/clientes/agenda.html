@@ -26,7 +26,8 @@
 		<h2>Ingresar datos de cliente</h2>
 		 <form th:action="@{/agendas/create}" th:object="${agenda}" method="post">
 			<p>Nombre del cliente: <input type="text" th:field="${cliente.nombre}" placeholder="Nombre"/></p>
-			<p>Patente del vehiculo: <input type="text" th:field="${cliente.patente}" placeholder="Patente"/></p>
+			<p>Patente del vehiculo: <input type="text" th:field="${cliente.patente}" placeholder="Patente" onblur="validarFormatoPatente()" /></p>
+			
 			<div class="container-radio">
 			<div>
 		        <label>Que lavado quieres?</label>
@@ -71,11 +72,11 @@
 		  <tbody>
 			  <tr th:each="a : ${agendas}">
 				  <td><span th:text="${a.cliente.isPremium == false} ? 'No' : 'Si'"></span></td>
-				  <td><span  th:text="${a.cliente.nombre}"></span></td>
-				  <td><span  th:text="${a.cliente.patente}"></span></td>
-				  <td><span  th:if="${a.servicioContratados.lavado.basico == true}" th:text="${a.servicioContratados.lavado.basico} ? 'No' : 'Si'"></span></td>
-				  <td><span  th:if="${a.servicioContratados.lavado.completo == true}" th:text="${a.servicioContratados.lavado.completo == false} ? 'No' : 'Si'"></span></td>
-				  <td><span  th:if="${a.servicioContratados.lavado.premium == true}" th:text="${a.servicioContratados.lavado.premium == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:text="${a.cliente.nombre}" required></span></td>
+				  <td><span th:text="${a.cliente.patente}" required></span></td>
+				  <td><span th:if="${a.servicioContratados.lavado.basico == true}" th:text="${a.servicioContratados.lavado.basico} ? 'Si' : 'No'"></span></td>
+				  <td><span th:if="${a.servicioContratados.lavado.completo == true}" th:text="${a.servicioContratados.lavado.completo == false} ? 'No' : 'Si'"></span></td>
+				  <td><span th:if="${a.servicioContratados.lavado.premium == true}" th:text="${a.servicioContratados.lavado.premium == false} ? 'No' : 'Si'"></span></td>
 				  
 				  <td><span th:if="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == true}" th:text="${a.servicioContratados.alineacionYbalanceo.cambioDeCubierta == false} ? 'No' : 'Si'"></span></td>
 				  

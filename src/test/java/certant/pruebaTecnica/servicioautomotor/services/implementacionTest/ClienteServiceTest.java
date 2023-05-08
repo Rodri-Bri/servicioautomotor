@@ -33,7 +33,7 @@ public class ClienteServiceTest {
 	
 	
 	@Test
-	public void getAllTest(){
+	public void getAllTest() throws Exception{
 		List<Cliente> listCliente = new ArrayList<>();
 		Cliente cliente = new Cliente();
 		cliente.setCantServiciosContratados(1);;
@@ -50,28 +50,28 @@ public class ClienteServiceTest {
 	
 	
 	@Test
-	public void findByIdTest() {
+	public void findByIdTest() throws Exception {
 		Mockito.when(clienteRepository.findByIdCliente(1)).thenReturn(simulado());
 		Cliente cliente = clienteService.findById(1);
 		assertEquals(simulado(), cliente);
 	}
 	
 	@Test
-	public void insertOrUpdateTest() {
+	public void insertOrUpdateTest() throws Exception {
 		Mockito.when(clienteRepository.save(Mockito.any())).thenReturn(simulado());
 		Cliente cliente = clienteService.insertOrUpdate(simulado());
 		assertEquals(simulado(), cliente);
 	}
 	
 	@Test
-	public void findByPatenteTest() {
+	public void findByPatenteTest() throws Exception {
 		Mockito.when(clienteRepository.findByPatente("aa111aa")).thenReturn(simulado());
 		Cliente cliente = clienteService.findByPatente("aa111aa");
 		assertEquals(simulado(), cliente);
 	}
 	
 	
-	public static Cliente simulado() {
+	public static Cliente simulado() throws Exception {
 		Cliente cliente = new Cliente();
 		cliente.setCantServiciosContratados(1);;
 		cliente.setIdCliente(1);
